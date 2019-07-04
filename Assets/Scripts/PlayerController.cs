@@ -70,23 +70,25 @@ public class PlayerController : MonoBehaviour
         {
             float dt = Time.deltaTime;
             dashTime -= dt;
+            rigid2D.velocity = (new Vector2(Mathf.Cos((angle + 90) * Mathf.PI / 180), Mathf.Sin((angle + 90) * Mathf.PI / 180)) * 24);
             if (dashTime < 0)
             {
                 dt += dashTime;
                 dash = false;
+                rigid2D.velocity = new Vector2(0, 0);
             }
-            rigid2D.position += new Vector2(Mathf.Cos((angle+90) * Mathf.PI / 180), Mathf.Sin((angle+90) * Mathf.PI / 180)) *24*dt;
         }
         if(bounce)
         {
             float dt = Time.deltaTime;
             bounceTime -= dt;
+            rigid2D.velocity = bounceDir * 12;
             if (bounceTime < 0)
             {
                 dt += bounceTime;
                 bounce = false;
+                rigid2D.velocity = new Vector2(0, 0);
             }
-            rigid2D.position += bounceDir * 12 * dt;
         }
         if(dashCooldown > 0)
         {
@@ -109,5 +111,11 @@ public class PlayerController : MonoBehaviour
         bounce = true;
         bounceTime = 0.12f;
         bounceDir = direction;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        rigid2D.velocity = new Vector2(0, 0);
+        rigid2D.angularVelocity = 0;
     }
 }

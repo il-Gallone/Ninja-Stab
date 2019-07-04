@@ -5,26 +5,27 @@ using UnityEngine;
 public class EnemyColliderController : MonoBehaviour
 {
     GameObject player;
+    Rigidbody2D rigid2D;
     bool blocked = false;
     float smokeTime = 0;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-    }
-    public void Smoke(float timeLeft)
-    {
-        smokeTime = timeLeft;
-        StartCoroutine("SmokeDecay");
+        rigid2D = gameObject.GetComponent<Rigidbody2D>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject == player)
+        rigid2D.velocity = new Vector2(0, 0);
+        rigid2D.angularVelocity = 0;
+        if (collision.gameObject == player)
         {
             if (player.GetComponent<PlayerController>().dash)
             {
-                StartCoroutine("DamageBlocker");
+                Vector2 bounceDir = player.transform.position - transform.position;
+                bounceDir.Normalize();
+                player.GetComponent<PlayerController>().BounceOffEnemy(bounceDir);
             }
         }
     }
@@ -33,32 +34,24 @@ public class EnemyColliderController : MonoBehaviour
     {
         if (collision.gameObject == player)
         {
-            StartCoroutine("DamageCheck");
+            if (player.GetComponent<PlayerController>().dash)
+            {
+                Destroy(gameObject);
+            }
         }
     }
-
-    IEnumerator DamageBlocker()
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        blocked = true;
-        Vector2 bounceDir = player.transform.position - transform.position;
-        bounceDir.Normalize();
-        player.GetComponent<PlayerController>().BounceOffEnemy(bounceDir);
-        yield return new WaitForSeconds(0.1f);
-        blocked = false;
-    }
-
-    IEnumerator DamageCheck()
-    {
-        yield return new WaitForSeconds(0.01f);
-        if (player.GetComponent<PlayerController>().dash && !blocked)
+        if (collision.tag == "Smoke")
         {
-            Destroy(gameObject);
+            gameObject.GetComponent<PolygonCollider2D>().isTrigger = true;
         }
     }
-
-    IEnumerator SmokeDecay()
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        yield return new WaitForSeconds(smokeTime);
-        gameObject.GetComponent<PolygonCollider2D>().isTrigger = false;
+        if (collision.tag == "Smoke")
+        {
+            gameObject.GetComponent<PolygonCollider2D>().isTrigger = false;
+        }
     }
 }

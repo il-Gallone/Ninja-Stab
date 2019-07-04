@@ -803,7 +803,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -1423,11 +1423,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
-    - target: {fileID: 7814711760145030871, guid: 72991e34aaa0ccb4b844b64e99a2129a,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 73761397}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72991e34aaa0ccb4b844b64e99a2129a, type: 3}
 --- !u!1001 &8823962190579211117

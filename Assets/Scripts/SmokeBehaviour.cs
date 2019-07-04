@@ -19,21 +19,4 @@ public class SmokeBehaviour : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == "Enemy")
-        {
-            collision.gameObject.GetComponent<PolygonCollider2D>().isTrigger = true;
-            collision.gameObject.GetComponent<EnemyColliderController>().Smoke(timeLeft);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Enemy")
-        {
-            collision.gameObject.GetComponent<PolygonCollider2D>().isTrigger = false;
-        }
-    }
 }
