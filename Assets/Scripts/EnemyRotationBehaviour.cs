@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class EnemyRotationBehaviour : MonoBehaviour
 {
-    public GameObject player;
+    GameObject player;
     public Rigidbody2D rigid2D;
     public float rotationSpeed = 1.5f;
-    
+
     // Update is called once per frame
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
     void Update()
     {
         Vector2 targetDirection = rigid2D.position - (Vector2)player.transform.position;

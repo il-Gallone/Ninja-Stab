@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
             dash = true;
             dashTime = 0.18f;
             dashCharges--;
-            if(dashCooldown <= 0)
+            if(dashCooldown <= 0 && dashCharges < 2)
                 dashCooldown = 3.0f;
         }
         if(Input.GetKeyDown("joystick 1 button 1") && item != "none")
@@ -58,6 +58,11 @@ public class PlayerController : MonoBehaviour
                     item = "none";
                     GameObject smoke = GameObject.Instantiate(smokePrefab, transform.position, transform.rotation);
                     smoke.GetComponent<SmokeProjectile>().direction = new Vector2(Mathf.Cos((angle + 90) * Mathf.PI / 180), Mathf.Sin((angle + 90) * Mathf.PI / 180));
+                    break;
+                case "boost":
+                    item = "none";
+                    dashCharges += 3;
+                    dashCooldown = 0;
                     break;
             }
         }

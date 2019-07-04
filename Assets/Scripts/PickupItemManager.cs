@@ -5,7 +5,12 @@ using UnityEngine;
 public class PickupItemManager : MonoBehaviour
 {
     public string itemID;
-    public GameObject player;
+    GameObject player;
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {

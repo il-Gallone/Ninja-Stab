@@ -30,6 +30,10 @@ public class PickupItemTracker : MonoBehaviour
             {
                 display.sprite = smoke;
             }
+            if (player.GetComponent<PlayerController>().item == "boost")
+            {
+                display.sprite = boost;
+            }
         }
     }
 }
