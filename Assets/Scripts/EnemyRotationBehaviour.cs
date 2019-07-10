@@ -6,7 +6,9 @@ public class EnemyRotationBehaviour : MonoBehaviour
 {
     GameObject player;
     public Rigidbody2D rigid2D;
-    public float rotationSpeed = 1.5f;
+    bool awakened = false;
+    public float rotationSpeed = 120f;
+    float bolasTime = 0;
 
     // Update is called once per frame
     private void Start()
@@ -16,21 +18,32 @@ public class EnemyRotationBehaviour : MonoBehaviour
 
     void Update()
     {
-        Vector2 targetDirection = rigid2D.position - (Vector2)player.transform.position;
-        targetDirection.Normalize();
-        float targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) / Mathf.PI * 180 +90;
-        rigid2D.rotation = Mathf.LerpAngle(rigid2D.rotation, targetAngle, rotationSpeed * Time.deltaTime);
+        if (awakened)
+        {
+            if (bolasTime > 0)
+            {
+                bolasTime -= Time.deltaTime;
+                if (bolasTime <= 0)
+                {
+                    rotationSpeed *= 2;
+                }
+            }
+            Vector2 targetDirection = rigid2D.position - (Vector2)player.transform.position;
+            targetDirection.Normalize();
+            float targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) / Mathf.PI * 180 + 90;
+            rigid2D.rotation = Mathf.MoveTowardsAngle(rigid2D.rotation, targetAngle, rotationSpeed * Time.deltaTime);
+        }
     }
 
     public void BolasAttack()
     {
-        StartCoroutine("RotateSlow");
+        awakened = true;
+        rotationSpeed /= 2;
+        bolasTime = 5f;
     }
 
-    IEnumerator RotateSlow()
+    public void Alert()
     {
-        rotationSpeed /= 2;
-        yield return new WaitForSeconds(5);
-        rotationSpeed *= 2;
+        awakened = true;
     }
 }

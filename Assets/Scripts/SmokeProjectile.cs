@@ -13,14 +13,14 @@ public class SmokeProjectile : MonoBehaviour
         StartCoroutine("SmokesOut");
     }
 
-    IEnumerator SmokesOut()
+    private void Update()
     {
-        for(float i = 0; i < 0.5; i+= Time.deltaTime)
-        {
-            transform.position += (Vector3)direction * 8 * Time.deltaTime;
-            yield return null;
-        }
+        transform.position += (Vector3)direction * 8 * Time.deltaTime;
+    }
+
+    private void OnDestroy()
+    {
         Instantiate(smokePrefab, transform.position, transform.rotation);
-        Destroy(gameObject);
     }
 }
+    

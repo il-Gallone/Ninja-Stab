@@ -22,7 +22,7 @@ public class BolasProjectile : MonoBehaviour
     {
         if(collision.tag == "Enemy")
         {
-            collision.gameObject.GetComponent<EnemyRotationBehaviour>().BolasAttack();
+            collision.gameObject.SendMessage("BolasAttack");
             Destroy(gameObject);
         }
     }

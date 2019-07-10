@@ -5,12 +5,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rigid2D;
-    float speed = 4;
+    float speed = 3;
     float angle = 0;
     public bool dash = false;
     float dashTime = 0;
     public int dashCharges = 2;
     public float dashCooldown = 0;
+    public float invulnTime = 0;
     bool bounce = false;
     float bounceTime = 0;
     Vector2 bounceDir;
@@ -42,7 +43,7 @@ public class PlayerController : MonoBehaviour
             dashTime = 0.18f;
             dashCharges--;
             if(dashCooldown <= 0 && dashCharges < 2)
-                dashCooldown = 3.0f;
+                dashCooldown = 3f;
         }
         if(Input.GetKeyDown("joystick 1 button 1") && item != "none")
         {
@@ -52,12 +53,13 @@ public class PlayerController : MonoBehaviour
                     item = "none";
                     GameObject bolas = GameObject.Instantiate(bolasPrefab, transform.position, transform.rotation);
                     bolas.GetComponent<BolasProjectile>().direction = new Vector2(Mathf.Cos((angle + 90) * Mathf.PI / 180), Mathf.Sin((angle + 90) * Mathf.PI / 180));
-                    Destroy(bolas, 3f);
+                    Destroy(bolas, 1.2f);
                     break;
                 case "smoke":
                     item = "none";
                     GameObject smoke = GameObject.Instantiate(smokePrefab, transform.position, transform.rotation);
                     smoke.GetComponent<SmokeProjectile>().direction = new Vector2(Mathf.Cos((angle + 90) * Mathf.PI / 180), Mathf.Sin((angle + 90) * Mathf.PI / 180));
+                    Destroy(smoke, 0.5f);
                     break;
                 case "boost":
                     item = "none";
@@ -102,10 +104,16 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        if(invulnTime >0)
+        {
+            invulnTime -= Time.deltaTime;
+        }
     }
 
     public void BounceOffEnemy(Vector2 direction)
     {
+        if (invulnTime <= 0)
+            invulnTime = 0.05f;
         dash = false;
         dashTime = 0;
         bounce = true;
@@ -117,5 +125,14 @@ public class PlayerController : MonoBehaviour
     {
         rigid2D.velocity = new Vector2(0, 0);
         rigid2D.angularVelocity = 0;
+    }
+
+    public void Damage()
+    {
+        if (invulnTime <= 0)
+        {
+            print("Ouch that hurt you b*tch!");
+            invulnTime = 0.5f;
+        }
     }
 }
