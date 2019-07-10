@@ -331,6 +331,118 @@ MonoBehaviour:
     type: 3}
   smokePrefab: {fileID: 3614708955016699806, guid: f841b5b8f76d8ce418760cb581f5b940,
     type: 3}
+--- !u!1001 &452090107
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7814711760145030894, guid: 72991e34aaa0ccb4b844b64e99a2129a,
+        type: 3}
+      propertyPath: m_Name
+      value: Star Thrower Placeholder
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814711760145030889, guid: 72991e34aaa0ccb4b844b64e99a2129a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814711760145030889, guid: 72991e34aaa0ccb4b844b64e99a2129a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814711760145030889, guid: 72991e34aaa0ccb4b844b64e99a2129a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814711760145030889, guid: 72991e34aaa0ccb4b844b64e99a2129a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814711760145030889, guid: 72991e34aaa0ccb4b844b64e99a2129a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814711760145030889, guid: 72991e34aaa0ccb4b844b64e99a2129a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814711760145030889, guid: 72991e34aaa0ccb4b844b64e99a2129a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814711760145030889, guid: 72991e34aaa0ccb4b844b64e99a2129a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814711760145030889, guid: 72991e34aaa0ccb4b844b64e99a2129a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814711760145030889, guid: 72991e34aaa0ccb4b844b64e99a2129a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814711760145030889, guid: 72991e34aaa0ccb4b844b64e99a2129a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814711760145030890, guid: 72991e34aaa0ccb4b844b64e99a2129a,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.629895
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814711760145030890, guid: 72991e34aaa0ccb4b844b64e99a2129a,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.8962264
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814711760145030890, guid: 72991e34aaa0ccb4b844b64e99a2129a,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.6347505
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 72991e34aaa0ccb4b844b64e99a2129a, type: 3}
+--- !u!1 &452090108 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7814711760145030894, guid: 72991e34aaa0ccb4b844b64e99a2129a,
+    type: 3}
+  m_PrefabInstance: {fileID: 452090107}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &452090109 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 7814711760145030891, guid: 72991e34aaa0ccb4b844b64e99a2129a,
+    type: 3}
+  m_PrefabInstance: {fileID: 452090107}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &452090110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452090108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e1fffaa158ecc4a8e57054315bef6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigid2D: {fileID: 452090109}
+  speed: 0.6
+  starPrefab: {fileID: 8512930439468263806, guid: b07c3a06a3982aa41bd2636f1cda3e05,
+    type: 3}
 --- !u!1 &454239560
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,6 @@ public class EnemyColliderController : MonoBehaviour
 {
     GameObject player;
     Rigidbody2D rigid2D;
-    float smokeTime = 0;
 
     private void Start()
     {
