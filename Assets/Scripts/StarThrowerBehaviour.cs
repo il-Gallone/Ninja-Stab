@@ -2,21 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StarThrowerBehavior : MonoBehaviour
+public class StarThrowerBehaviour : EnemyBase
 {
-    bool awakened = false;
-    public Rigidbody2D rigid2D;
     public float speed = 0.6f;
-    float bolasTime = 0;
-    GameObject player;
     public GameObject starPrefab;
     float throwTime = 0;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-    }
+    
 
     // Update is called once per frame
     void Update()
@@ -41,18 +32,13 @@ public class StarThrowerBehavior : MonoBehaviour
                     {
                         GameObject star = GameObject.Instantiate(starPrefab, transform.position, transform.rotation);
                         star.GetComponent<StarProjectile>().direction = -targetDirection;
-                        Destroy(star, 3.6f);
+                        Destroy(star, 1f);
                         throwTime = 3;
                     }
                     throwTime -= Time.deltaTime;
                 }
             }
         }
-    }
-
-    public void Alert()
-    {
-        awakened = true;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -69,12 +55,5 @@ public class StarThrowerBehavior : MonoBehaviour
                 player.GetComponent<PlayerController>().BounceOffEnemy(bounceDir);
             }
         }
-    }
-
-
-    public void BolasAttack()
-    {
-        awakened = true;
-        bolasTime = 5f;
     }
 }

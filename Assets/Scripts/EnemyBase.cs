@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GruntMovementBehavior : MonoBehaviour
+public class EnemyBase : MonoBehaviour
 {
-    bool awakened = false;
+    public bool awakened = false;
     public Rigidbody2D rigid2D;
-    public float speed = 0.2f;
-    float bolasTime = 0;
-    GameObject player;
+    public float bolasTime = 0;
+    public GameObject player;
+
 
     // Start is called before the first frame update
     void Start()
@@ -16,28 +16,15 @@ public class GruntMovementBehavior : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void Backstab()
     {
-        if (awakened)
-        {
-            if (bolasTime > 0)
-            {
-                bolasTime -= Time.deltaTime;
-            }
-            else
-            {
-                Vector2 targetDirection = rigid2D.position - (Vector2)player.transform.position;
-                if (player.GetComponent<PlayerController>().dashCharges > 1)
-                {
-                    rigid2D.velocity = targetDirection * speed;
-                }
-                else
-                {
-                    rigid2D.velocity = -targetDirection * speed;
-                }
-            }
-        }
+        Destroy(gameObject);
+    }
+
+    public virtual void BolasAttack()
+    {
+        awakened = true;
+        bolasTime = 5f;
     }
 
     public void Alert()
@@ -59,12 +46,5 @@ public class GruntMovementBehavior : MonoBehaviour
                 player.GetComponent<PlayerController>().BounceOffEnemy(bounceDir);
             }
         }
-    }
-
-
-    public void BolasAttack()
-    {
-        awakened = true;
-        bolasTime = 5f;
     }
 }

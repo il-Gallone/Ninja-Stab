@@ -2,19 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyRotationBehaviour : MonoBehaviour
+public class EnemyRotationBehaviour : EnemyBase
 {
-    GameObject player;
-    public Rigidbody2D rigid2D;
-    bool awakened = false;
     public float rotationSpeed = 120f;
-    float bolasTime = 0;
-
-    // Update is called once per frame
-    private void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-    }
+    
 
     void Update()
     {
@@ -35,15 +26,15 @@ public class EnemyRotationBehaviour : MonoBehaviour
         }
     }
 
-    public void BolasAttack()
+    public override void BolasAttack()
     {
-        awakened = true;
         rotationSpeed /= 2;
+        awakened = true;
         bolasTime = 5f;
     }
 
-    public void Alert()
+    public override void Backstab()
     {
-        awakened = true;
+        //Do Nothing
     }
 }
