@@ -34,7 +34,7 @@ public class EnemyColliderController : MonoBehaviour
         {
             if (player.GetComponent<PlayerController>().dash)
             {
-                gameObject.SendMessage("Backstab");
+                gameObject.SendMessageUpwards("Backstab");
             }
         }
     }
