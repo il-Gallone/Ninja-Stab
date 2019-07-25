@@ -8,7 +8,8 @@ public class EnemyBase : MonoBehaviour
     public Rigidbody2D rigid2D;
     public float bolasTime = 0;
     public GameObject player;
-    
+    public float rotationSpeed = 90f;
+
 
 
     // Start is called before the first frame update
@@ -17,8 +18,16 @@ public class EnemyBase : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
+        if (bolasTime > 0)
+        {
+            bolasTime -= Time.deltaTime;
+            if (bolasTime <= 0)
+            {
+                rotationSpeed *= 2;
+            }
+        }
     }
 
     public virtual void Backstab()
@@ -28,6 +37,7 @@ public class EnemyBase : MonoBehaviour
 
     public virtual void BolasAttack()
     {
+        rotationSpeed /= 2;
         awakened = true;
         bolasTime = 5f;
     }

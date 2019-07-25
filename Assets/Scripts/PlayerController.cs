@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rigid2D;
-    float speed = 3;
+    float speed = 4.5f;
     public float angle = 0;
     public bool dash = false;
     float dashTime = 0;
@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
         {
             float dt = Time.deltaTime;
             dashTime -= dt;
-            rigid2D.velocity = (new Vector2(Mathf.Cos((angle + 90) * Mathf.PI / 180), Mathf.Sin((angle + 90) * Mathf.PI / 180)) * 24);
+            rigid2D.velocity = (new Vector2(Mathf.Cos((angle + 90) * Mathf.PI / 180), Mathf.Sin((angle + 90) * Mathf.PI / 180)) * 36);
             if (dashTime < 0)
             {
                 dt += dashTime;
@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
         {
             float dt = Time.deltaTime;
             bounceTime -= dt;
-            rigid2D.velocity = bounceDir * 12;
+            rigid2D.velocity = bounceDir * 18;
             if (bounceTime < 0)
             {
                 dt += bounceTime;

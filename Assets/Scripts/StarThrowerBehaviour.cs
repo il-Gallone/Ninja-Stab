@@ -14,11 +14,7 @@ public class StarThrowerBehaviour : EnemyBase
     {
         if (awakened)
         {
-            if(bolasTime > 0)
-            {
-                bolasTime -= Time.deltaTime;
-            }
-            else
+            if(bolasTime <= 0)
             {
                 Vector2 targetDirection = rigid2D.position - (Vector2)player.transform.position;
                 targetDirection.Normalize();
