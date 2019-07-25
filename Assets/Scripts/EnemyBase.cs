@@ -8,12 +8,17 @@ public class EnemyBase : MonoBehaviour
     public Rigidbody2D rigid2D;
     public float bolasTime = 0;
     public GameObject player;
+    
 
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    private void FixedUpdate()
+    {
     }
 
     public virtual void Backstab()
@@ -45,6 +50,22 @@ public class EnemyBase : MonoBehaviour
                 player.GetComponent<PlayerController>().Damage();
                 player.GetComponent<PlayerController>().BounceOffEnemy(bounceDir);
             }
+        }
+    }
+
+
+    public virtual void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "Smoke")
+        {
+            gameObject.GetComponent<PolygonCollider2D>().isTrigger = true;
+        }
+    }
+    public virtual void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Smoke")
+        {
+            gameObject.GetComponent<PolygonCollider2D>().isTrigger = false;
         }
     }
 }

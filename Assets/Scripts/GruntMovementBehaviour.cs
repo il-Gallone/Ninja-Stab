@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GruntMovementBehaviour : EnemyBase
 {
-    public float speed = 0.2f;
+    public float speed = 1.5f;
     
 
     // Update is called once per frame
@@ -19,6 +19,7 @@ public class GruntMovementBehaviour : EnemyBase
             else
             {
                 Vector2 targetDirection = rigid2D.position - (Vector2)player.transform.position;
+                targetDirection.Normalize();
                 if (player.GetComponent<PlayerController>().dashCharges > 1)
                 {
                     rigid2D.velocity = targetDirection * speed;

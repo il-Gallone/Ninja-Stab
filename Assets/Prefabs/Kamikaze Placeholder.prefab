@@ -450,7 +450,7 @@ MonoBehaviour:
   rigid2D: {fileID: 8451294025042128776}
   bolasTime: 0
   player: {fileID: 0}
-  rotationSpeed: 120
+  rotationSpeed: 90
 --- !u!114 &1817881752854032671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,7 +467,7 @@ MonoBehaviour:
   rigid2D: {fileID: 8451294025042128776}
   bolasTime: 0
   player: {fileID: 0}
-  speed: 0.8
+  speed: 1.8
   fuseLit: 0
   fuseTime: 0
   explosionPrefab: {fileID: 8363195621906408191, guid: eed2abde406e30449af956f63ecd1c6c,

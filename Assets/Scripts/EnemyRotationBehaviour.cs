@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyRotationBehaviour : EnemyBase
 {
-    public float rotationSpeed = 120f;
-    
+    public float rotationSpeed = 90f;
+
 
     void Update()
     {
@@ -19,22 +19,22 @@ public class EnemyRotationBehaviour : EnemyBase
                     rotationSpeed *= 2;
                 }
             }
-            Vector2 targetDirection = rigid2D.position - (Vector2)player.transform.position;
+            Vector2 targetDirection = transform.position - player.transform.position;
             targetDirection.Normalize();
             float targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) / Mathf.PI * 180 + 90;
-            rigid2D.rotation = Mathf.MoveTowardsAngle(rigid2D.rotation, targetAngle, rotationSpeed * Time.deltaTime);
+            transform.eulerAngles = new Vector3(0, 0, Mathf.MoveTowardsAngle(transform.eulerAngles.z, targetAngle, rotationSpeed * Time.deltaTime));
         }
     }
+    
 
+    public override void Backstab()
+    {
+        //Do Nothing
+    }
     public override void BolasAttack()
     {
         rotationSpeed /= 2;
         awakened = true;
         bolasTime = 5f;
-    }
-
-    public override void Backstab()
-    {
-        //Do Nothing
     }
 }

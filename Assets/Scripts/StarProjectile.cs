@@ -14,7 +14,7 @@ public class StarProjectile : MonoBehaviour
 
     void Update()
     {
-        rigid2D.position += direction * 1.5f * Time.deltaTime;
+        rigid2D.position += direction * 12f * Time.deltaTime;
         transform.eulerAngles += new Vector3(0, 0, 360 * Time.deltaTime);
     }
 

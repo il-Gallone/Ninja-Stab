@@ -342,7 +342,7 @@ MonoBehaviour:
   rigid2D: {fileID: 3289223006803230840}
   bolasTime: 0
   player: {fileID: 0}
-  rotationSpeed: 50
+  rotationSpeed: 45
 --- !u!114 &3485534700896329424
 MonoBehaviour:
   m_ObjectHideFlags: 0

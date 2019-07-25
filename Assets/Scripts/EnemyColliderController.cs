@@ -38,18 +38,4 @@ public class EnemyColliderController : MonoBehaviour
             }
         }
     }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.tag == "Smoke")
-        {
-            gameObject.GetComponent<PolygonCollider2D>().isTrigger = true;
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Smoke")
-        {
-            gameObject.GetComponent<PolygonCollider2D>().isTrigger = false;
-        }
-    }
 }

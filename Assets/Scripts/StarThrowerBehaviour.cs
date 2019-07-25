@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StarThrowerBehaviour : EnemyBase
 {
-    public float speed = 0.6f;
+    public float speed = 1.8f;
     public GameObject starPrefab;
     float throwTime = 0;
     
@@ -14,13 +14,14 @@ public class StarThrowerBehaviour : EnemyBase
     {
         if (awakened)
         {
-            if (bolasTime > 0)
+            if(bolasTime > 0)
             {
                 bolasTime -= Time.deltaTime;
             }
             else
             {
                 Vector2 targetDirection = rigid2D.position - (Vector2)player.transform.position;
+                targetDirection.Normalize();
                 if (Vector3.Distance(player.GetComponent<PlayerController>().transform.position, transform.position) <= 3)
                 {
                     rigid2D.velocity = targetDirection * speed;

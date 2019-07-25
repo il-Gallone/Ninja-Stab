@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rigid2D;
     float speed = 3;
-    float angle = 0;
+    public float angle = 0;
     public bool dash = false;
     float dashTime = 0;
     public int dashCharges = 2;
@@ -19,10 +19,17 @@ public class PlayerController : MonoBehaviour
     public GameObject bolasPrefab;
     public GameObject smokePrefab;
 
+    public Sprite up;
+    public Sprite down;
+    public Sprite left;
+    public Sprite right;
+    SpriteRenderer spriteRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
         rigid2D = gameObject.GetComponent<Rigidbody2D>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -32,9 +39,24 @@ public class PlayerController : MonoBehaviour
         float yAxis = Input.GetAxis("Vertical"); //Change Vertical to Y-axis when switching to PS controller
         Vector2 direction = new Vector2(xAxis, yAxis);
         direction.Normalize();
-        if ((xAxis != 0 || yAxis != 0 )&& !dash)
-            angle = Mathf.Atan2(yAxis, xAxis)/Mathf.PI*180-90;
-        transform.eulerAngles = new Vector3(0, 0, angle);
+        if ((xAxis != 0 || yAxis != 0) && !dash)
+            angle = Mathf.Atan2(yAxis, xAxis) / Mathf.PI * 180 - 90;
+        if (angle <= 45 && angle > -45)
+        {
+            spriteRenderer.sprite = up;
+        }
+        if (angle > 45 || angle <= -225)
+        {
+            spriteRenderer.sprite = left;
+        }
+        if (angle > -225 && angle <= -135)
+        {
+            spriteRenderer.sprite = down;
+        }
+        if (angle > -135 && angle <= -45)
+        {
+            spriteRenderer.sprite = right;
+        }
 
         rigid2D.position += direction * speed * Time.deltaTime;
         if (Input.GetKeyDown("joystick 1 button 0") && !bounce && dashCharges > 0)
