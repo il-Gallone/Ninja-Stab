@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rigid2D;
+
     public int health = 4;
+
     float speed = 4.5f;
     public float angle = 0;
     public bool dash = false;
