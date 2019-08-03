@@ -14,11 +14,8 @@ public class KamikazeMovementBehaviour : EnemyBase
     {
         if (awakened)
         {
-            if(bolasTime > 0)
-            {
-                bolasTime -= Time.deltaTime;
-            }
-            else if (fuseTime <= 4)
+
+            if (bolasTime <= 0 && fuseTime <= 4)
             {
                 Vector2 targetDirection = rigid2D.position - (Vector2)player.transform.position;
                 targetDirection.Normalize();

@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CooldownTracker : MonoBehaviour
+public class HealthIndicator : MonoBehaviour
 {
     public GameObject player;
+    public SpriteMask mask;
 
     private void Start()
     {
@@ -14,6 +15,6 @@ public class CooldownTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.GetComponent<SpriteMask>().alphaCutoff = Mathf.InverseLerp(3, 0, 3 - player.GetComponent<PlayerController>().dashCooldown);
+        mask.alphaCutoff = 1 - player.GetComponent<PlayerController>().health / 4f;
     }
 }

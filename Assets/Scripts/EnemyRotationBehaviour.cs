@@ -4,21 +4,12 @@ using UnityEngine;
 
 public class EnemyRotationBehaviour : EnemyBase
 {
-    public float rotationSpeed = 90f;
 
 
     void Update()
     {
         if (awakened)
         {
-            if (bolasTime > 0)
-            {
-                bolasTime -= Time.deltaTime;
-                if (bolasTime <= 0)
-                {
-                    rotationSpeed *= 2;
-                }
-            }
             Vector2 targetDirection = transform.position - player.transform.position; //Get Direction to start turning
             targetDirection.Normalize(); //Normallize Direction
             float targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) / Mathf.PI * 180 + 90; //Find the angle of the direction

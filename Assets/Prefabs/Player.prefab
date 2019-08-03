@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8823962189107384915
+--- !u!1 &6785082720764895630
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,38 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8823962189107384879}
-  - component: {fileID: 8823962189107384876}
-  - component: {fileID: 8823962189107384877}
-  - component: {fileID: 8823962189107384914}
+  - component: {fileID: 6785082720764895618}
+  - component: {fileID: 6785082720764895619}
+  - component: {fileID: 6785082720764895628}
+  - component: {fileID: 6785082720764895629}
+  - component: {fileID: 6785082720764895617}
   m_Layer: 0
-  m_Name: Bolas Pickup Placeholder
-  m_TagString: Untagged
+  m_Name: Player
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8823962189107384879
+--- !u!4 &6785082720764895618
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8823962189107384915}
+  m_GameObject: {fileID: 6785082720764895630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: 3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &8823962189107384876
+--- !u!212 &6785082720764895619
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8823962189107384915}
+  m_GameObject: {fileID: 6785082720764895630}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -61,7 +62,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -69,8 +70,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: a7bf7849554961948a8d72ec38ea85b5, type: 3}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: -1092042315134319442, guid: c82f5be3a5b3fe04aa94a9bb69610e9c,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -81,33 +83,66 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &8823962189107384877
+--- !u!50 &6785082720764895628
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6785082720764895630}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!58 &6785082720764895629
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8823962189107384915}
+  m_GameObject: {fileID: 6785082720764895630}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.64
---- !u!114 &8823962189107384914
+--- !u!114 &6785082720764895617
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8823962189107384915}
+  m_GameObject: {fileID: 6785082720764895630}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4de9404f416e524095130d24fe43365, type: 3}
+  m_Script: {fileID: 11500000, guid: 2668e0bc4289f4f41a00ac5da8b92bb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemID: bolas
-  player: {fileID: 0}
+  angle: 0
+  dash: 0
+  dashCharges: 2
+  dashCooldown: 0
+  invulnTime: 0
+  item: none
+  bolasPrefab: {fileID: 2271694338263703881, guid: 206c77c82b4503c40821f9d6b4ce035a,
+    type: 3}
+  smokePrefab: {fileID: 3614708955016699806, guid: f841b5b8f76d8ce418760cb581f5b940,
+    type: 3}
+  up: {fileID: -3256405142223637389, guid: c82f5be3a5b3fe04aa94a9bb69610e9c, type: 3}
+  down: {fileID: -1092042315134319442, guid: c82f5be3a5b3fe04aa94a9bb69610e9c, type: 3}
+  left: {fileID: 8177108276137261501, guid: c82f5be3a5b3fe04aa94a9bb69610e9c, type: 3}
+  right: {fileID: -5932311757756388274, guid: c82f5be3a5b3fe04aa94a9bb69610e9c, type: 3}

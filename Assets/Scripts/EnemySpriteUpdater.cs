@@ -10,7 +10,6 @@ public class EnemySpriteUpdater : EnemyBase
     public Sprite right;
     public SpriteRenderer spriteRenderer;
     public float angle = 0;
-    public float rotationSpeed = 90f;
 
     private void Awake()
     {
@@ -23,14 +22,6 @@ public class EnemySpriteUpdater : EnemyBase
 
         if (awakened)
         {
-            if (bolasTime > 0)
-            {
-                bolasTime -= Time.deltaTime;
-                if (bolasTime <= 0)
-                {
-                    rotationSpeed *= 2;
-                }
-            }
             Vector2 targetDirection = transform.position - player.transform.position;
             targetDirection.Normalize();
             float targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) / Mathf.PI * 180 + 90;
@@ -56,11 +47,5 @@ public class EnemySpriteUpdater : EnemyBase
     public override void Backstab()
     {
         //Do Nothing
-    }
-    public override void BolasAttack()
-    {
-        rotationSpeed /= 2;
-        awakened = true;
-        bolasTime = 5f;
     }
 }
