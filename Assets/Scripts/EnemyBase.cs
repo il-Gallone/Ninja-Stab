@@ -78,14 +78,14 @@ public class EnemyBase : MonoBehaviour
     {
         if (collision.tag == "Smoke")
         {
-            gameObject.GetComponent<PolygonCollider2D>().isTrigger = true;
+            gameObject.GetComponentInChildren<PolygonCollider2D>().isTrigger = true;
         }
     }
     public virtual void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.tag == "Smoke")
         {
-            gameObject.GetComponent<PolygonCollider2D>().isTrigger = false;
+            gameObject.GetComponentInChildren<PolygonCollider2D>().isTrigger = false;
         }
     }
 }
