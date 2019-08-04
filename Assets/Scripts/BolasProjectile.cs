@@ -22,7 +22,7 @@ public class BolasProjectile : MonoBehaviour
     {
         if(collision.tag == "Enemy")
         {
-            collision.gameObject.SendMessage("BolasAttack");
+            collision.gameObject.SendMessageUpwards("BolasAttack");
             Destroy(gameObject);
         }
     }

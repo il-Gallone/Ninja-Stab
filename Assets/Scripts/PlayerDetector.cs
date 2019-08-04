@@ -16,7 +16,7 @@ public class PlayerDetector : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            parent.SendMessage("Alert");
+            SendMessageUpwards("Alert");
             Destroy(gameObject);
         }
     }

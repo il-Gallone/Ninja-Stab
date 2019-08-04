@@ -2,48 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyRotationBehaviour : MonoBehaviour
+public class EnemyRotationBehaviour : EnemyBase
 {
-    GameObject player;
-    public Rigidbody2D rigid2D;
-    bool awakened = false;
-    public float rotationSpeed = 120f;
-    float bolasTime = 0;
 
-    // Update is called once per frame
-    private void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-    }
 
     void Update()
     {
         if (awakened)
         {
-            if (bolasTime > 0)
-            {
-                bolasTime -= Time.deltaTime;
-                if (bolasTime <= 0)
-                {
-                    rotationSpeed *= 2;
-                }
-            }
-            Vector2 targetDirection = rigid2D.position - (Vector2)player.transform.position;
-            targetDirection.Normalize();
-            float targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) / Mathf.PI * 180 + 90;
-            rigid2D.rotation = Mathf.MoveTowardsAngle(rigid2D.rotation, targetAngle, rotationSpeed * Time.deltaTime);
+            Vector2 targetDirection = transform.position - player.transform.position; //Get Direction to start turning
+            targetDirection.Normalize(); //Normallize Direction
+            float targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) / Mathf.PI * 180 + 90; //Find the angle of the direction
+            transform.eulerAngles = new Vector3(0, 0, Mathf.MoveTowardsAngle(transform.eulerAngles.z, targetAngle, rotationSpeed * Time.deltaTime)); //Rotate Collider slowly at set rate
         }
     }
+    
 
-    public void BolasAttack()
+    public override void Backstab()
     {
-        awakened = true;
-        rotationSpeed /= 2;
-        bolasTime = 5f;
+        //Do Nothing
     }
-
-    public void Alert()
+    public override void BolasAttack()
     {
+        rotationSpeed /= 2;
         awakened = true;
+        bolasTime = 5f;
     }
 }

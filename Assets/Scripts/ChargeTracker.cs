@@ -11,11 +11,6 @@ public class ChargeTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        char c = (char)8801;
-        text.text =  c + player.GetComponent<PlayerController>().dashCharges.ToString();
-        if (player.GetComponent<PlayerController>().dashCharges == 0)
-        {
-            text.text = "0";
-        }
+        text.text =  player.GetComponent<PlayerController>().dashCharges.ToString();
     }
 }

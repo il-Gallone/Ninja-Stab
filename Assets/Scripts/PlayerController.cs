@@ -5,8 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rigid2D;
-    float speed = 3;
-    float angle = 0;
+
+    public int health = 4;
+
+    float speed = 4.5f;
+    public float angle = 0;
     public bool dash = false;
     float dashTime = 0;
     public int dashCharges = 2;
@@ -19,10 +22,25 @@ public class PlayerController : MonoBehaviour
     public GameObject bolasPrefab;
     public GameObject smokePrefab;
 
+    public Sprite up;
+    public Sprite down;
+    public Sprite left;
+    public Sprite right;
+    SpriteRenderer spriteRenderer;
+
+    [Header("Audio")]
+    public AudioSource walkSource;
+    public AudioSource audioSource;
+    public AudioClip dashClip;
+    public AudioClip throwClip;
+    public AudioClip hurtClip;
+    public AudioClip deathClip;
+
     // Start is called before the first frame update
     void Start()
     {
         rigid2D = gameObject.GetComponent<Rigidbody2D>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -32,13 +50,40 @@ public class PlayerController : MonoBehaviour
         float yAxis = Input.GetAxis("Vertical"); //Change Vertical to Y-axis when switching to PS controller
         Vector2 direction = new Vector2(xAxis, yAxis);
         direction.Normalize();
-        if ((xAxis != 0 || yAxis != 0 )&& !dash)
-            angle = Mathf.Atan2(yAxis, xAxis)/Mathf.PI*180-90;
-        transform.eulerAngles = new Vector3(0, 0, angle);
+        if ((xAxis != 0 || yAxis != 0) && !dash)
+            angle = Mathf.Atan2(yAxis, xAxis) / Mathf.PI * 180 - 90;
+        if (angle <= 45 && angle > -45)
+        {
+            spriteRenderer.sprite = up;
+        }
+        if (angle > 45 || angle <= -225)
+        {
+            spriteRenderer.sprite = left;
+        }
+        if (angle > -225 && angle <= -135)
+        {
+            spriteRenderer.sprite = down;
+        }
+        if (angle > -135 && angle <= -45)
+        {
+            spriteRenderer.sprite = right;
+        }
 
         rigid2D.position += direction * speed * Time.deltaTime;
+        if(direction != new Vector2(0,0))
+        {
+            if(!walkSource.isPlaying)
+            {
+                walkSource.Play();
+            }
+        } else
+        {
+            walkSource.Stop();
+        }
         if (Input.GetKeyDown("joystick 1 button 0") && !bounce && dashCharges > 0)
         {
+            audioSource.clip = dashClip;
+            audioSource.Play();
             dash = true;
             dashTime = 0.18f;
             dashCharges--;
@@ -54,12 +99,16 @@ public class PlayerController : MonoBehaviour
                     GameObject bolas = GameObject.Instantiate(bolasPrefab, transform.position, transform.rotation);
                     bolas.GetComponent<BolasProjectile>().direction = new Vector2(Mathf.Cos((angle + 90) * Mathf.PI / 180), Mathf.Sin((angle + 90) * Mathf.PI / 180));
                     Destroy(bolas, 1.2f);
+                    audioSource.clip = throwClip;
+                    audioSource.Play();
                     break;
                 case "smoke":
                     item = "none";
                     GameObject smoke = GameObject.Instantiate(smokePrefab, transform.position, transform.rotation);
                     smoke.GetComponent<SmokeProjectile>().direction = new Vector2(Mathf.Cos((angle + 90) * Mathf.PI / 180), Mathf.Sin((angle + 90) * Mathf.PI / 180));
                     Destroy(smoke, 0.5f);
+                    audioSource.clip = throwClip;
+                    audioSource.Play();
                     break;
                 case "boost":
                     item = "none";
@@ -72,7 +121,7 @@ public class PlayerController : MonoBehaviour
         {
             float dt = Time.deltaTime;
             dashTime -= dt;
-            rigid2D.velocity = (new Vector2(Mathf.Cos((angle + 90) * Mathf.PI / 180), Mathf.Sin((angle + 90) * Mathf.PI / 180)) * 24);
+            rigid2D.velocity = (new Vector2(Mathf.Cos((angle + 90) * Mathf.PI / 180), Mathf.Sin((angle + 90) * Mathf.PI / 180)) * 36);
             if (dashTime < 0)
             {
                 dt += dashTime;
@@ -84,7 +133,7 @@ public class PlayerController : MonoBehaviour
         {
             float dt = Time.deltaTime;
             bounceTime -= dt;
-            rigid2D.velocity = bounceDir * 12;
+            rigid2D.velocity = bounceDir * 18;
             if (bounceTime < 0)
             {
                 dt += bounceTime;
@@ -131,7 +180,9 @@ public class PlayerController : MonoBehaviour
     {
         if (invulnTime <= 0)
         {
-            print("Ouch that hurt you b*tch!");
+            audioSource.clip = hurtClip;
+            audioSource.Play();
+            health--;
             invulnTime = 0.5f;
         }
     }
