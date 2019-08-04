@@ -10,12 +10,15 @@ public class EnemyBase : MonoBehaviour
     public GameObject player;
     public float rotationSpeed = 90f;
 
-
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip deathClip;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        audioSource = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -30,8 +33,15 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
+    public void PlayDeathClip()
+    {
+        audioSource.clip = deathClip;
+        audioSource.Play();
+    }
+
     public virtual void Backstab()
     {
+        PlayDeathClip();
         Destroy(gameObject);
     }
 

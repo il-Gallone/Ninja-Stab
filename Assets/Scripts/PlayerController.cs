@@ -28,6 +28,14 @@ public class PlayerController : MonoBehaviour
     public Sprite right;
     SpriteRenderer spriteRenderer;
 
+    [Header("Audio")]
+    public AudioSource walkSource;
+    public AudioSource audioSource;
+    public AudioClip dashClip;
+    public AudioClip throwClip;
+    public AudioClip hurtClip;
+    public AudioClip deathClip;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,8 +70,20 @@ public class PlayerController : MonoBehaviour
         }
 
         rigid2D.position += direction * speed * Time.deltaTime;
+        if(direction != new Vector2(0,0))
+        {
+            if(!walkSource.isPlaying)
+            {
+                walkSource.Play();
+            }
+        } else
+        {
+            walkSource.Stop();
+        }
         if (Input.GetKeyDown("joystick 1 button 0") && !bounce && dashCharges > 0)
         {
+            audioSource.clip = dashClip;
+            audioSource.Play();
             dash = true;
             dashTime = 0.18f;
             dashCharges--;
@@ -79,12 +99,16 @@ public class PlayerController : MonoBehaviour
                     GameObject bolas = GameObject.Instantiate(bolasPrefab, transform.position, transform.rotation);
                     bolas.GetComponent<BolasProjectile>().direction = new Vector2(Mathf.Cos((angle + 90) * Mathf.PI / 180), Mathf.Sin((angle + 90) * Mathf.PI / 180));
                     Destroy(bolas, 1.2f);
+                    audioSource.clip = throwClip;
+                    audioSource.Play();
                     break;
                 case "smoke":
                     item = "none";
                     GameObject smoke = GameObject.Instantiate(smokePrefab, transform.position, transform.rotation);
                     smoke.GetComponent<SmokeProjectile>().direction = new Vector2(Mathf.Cos((angle + 90) * Mathf.PI / 180), Mathf.Sin((angle + 90) * Mathf.PI / 180));
                     Destroy(smoke, 0.5f);
+                    audioSource.clip = throwClip;
+                    audioSource.Play();
                     break;
                 case "boost":
                     item = "none";
@@ -156,6 +180,8 @@ public class PlayerController : MonoBehaviour
     {
         if (invulnTime <= 0)
         {
+            audioSource.clip = hurtClip;
+            audioSource.Play();
             health--;
             invulnTime = 0.5f;
         }

@@ -9,6 +9,11 @@ public class KamikazeMovementBehaviour : EnemyBase
     public float fuseTime = 0;
     public GameObject explosionPrefab;
 
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     // Update is called once per frame
     void Update()
     {
