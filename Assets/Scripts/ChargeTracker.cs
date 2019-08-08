@@ -11,6 +11,7 @@ public class ChargeTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Change Canvas text to the number of player dashes.
         text.text =  player.GetComponent<PlayerController>().dashCharges.ToString();
     }
 }

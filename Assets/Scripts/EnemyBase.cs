@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyBase : MonoBehaviour
 {
     public bool awakened = false;
+    public float speed;
     public Rigidbody2D rigid2D;
     public float bolasTime = 0;
     public GameObject player;
@@ -15,14 +16,16 @@ public class EnemyBase : MonoBehaviour
     public AudioClip deathClip;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        //Find the Player
         player = GameObject.FindGameObjectWithTag("Player");
         audioSource = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
     {
+        //Bolas Countdown
         if (bolasTime > 0)
         {
             bolasTime -= Time.deltaTime;
@@ -47,6 +50,7 @@ public class EnemyBase : MonoBehaviour
 
     public virtual void BolasAttack()
     {
+        //Start Bolas Cooldown and Slow Rotation
         rotationSpeed /= 2;
         awakened = true;
         bolasTime = 5f;
@@ -54,28 +58,42 @@ public class EnemyBase : MonoBehaviour
 
     public void Alert()
     {
+        //Allows some code to function on enemies
         awakened = true;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    public float AngleFinder()
     {
-        rigid2D.velocity = new Vector2(0, 0);
-        rigid2D.angularVelocity = 0;
-        if (collision.gameObject == player)
-        {
-            if (!player.GetComponent<PlayerController>().dash)
-            {
-                Vector2 bounceDir = player.transform.position - transform.position;
-                bounceDir.Normalize();
-                player.GetComponent<PlayerController>().Damage();
-                player.GetComponent<PlayerController>().BounceOffEnemy(bounceDir);
-            }
-        }
+        //Use Targetdirection to rotate angle
+        Vector2 targetDirection = FindDirection(); //Normallize Direction
+        float targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) / Mathf.PI * 180 + 90; //Find the angle of the direction
+        return targetAngle;
     }
 
+    public void Flee()
+    {
+        Vector2 targetDirection = FindDirection();
+        rigid2D.velocity = targetDirection * speed;
+    }
+
+    public void Chase()
+    {
+        Vector2 targetDirection = FindDirection();
+        rigid2D.velocity = -targetDirection * speed;
+    }
+
+    //Get Target Direction
+    public Vector2 FindDirection()
+    {
+        Vector2 targetDirection = rigid2D.position - (Vector2)player.transform.position;
+        targetDirection.Normalize();
+        return targetDirection;
+    }
+    
 
     public virtual void OnTriggerStay2D(Collider2D collision)
     {
+        //If the enemy is in a smoke cloud turn off the front barrier,
         if (collision.tag == "Smoke")
         {
             gameObject.GetComponentInChildren<PolygonCollider2D>().isTrigger = true;
@@ -83,6 +101,7 @@ public class EnemyBase : MonoBehaviour
     }
     public virtual void OnTriggerExit2D(Collider2D collision)
     {
+        //Turn back on the front barrier if smoke disappears or unit moves out of smoke
         if (collision.tag == "Smoke")
         {
             gameObject.GetComponentInChildren<PolygonCollider2D>().isTrigger = false;

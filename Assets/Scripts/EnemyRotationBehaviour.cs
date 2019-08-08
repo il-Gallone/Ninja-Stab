@@ -10,10 +10,7 @@ public class EnemyRotationBehaviour : EnemyBase
     {
         if (awakened)
         {
-            Vector2 targetDirection = transform.position - player.transform.position; //Get Direction to start turning
-            targetDirection.Normalize(); //Normallize Direction
-            float targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) / Mathf.PI * 180 + 90; //Find the angle of the direction
-            transform.eulerAngles = new Vector3(0, 0, Mathf.MoveTowardsAngle(transform.eulerAngles.z, targetAngle, rotationSpeed * Time.deltaTime)); //Rotate Collider slowly at set rate
+            transform.eulerAngles = new Vector3(0, 0, Mathf.MoveTowardsAngle(transform.eulerAngles.z, AngleFinder(), rotationSpeed * Time.deltaTime)); //Rotate Collider slowly at set rate
         }
     }
     

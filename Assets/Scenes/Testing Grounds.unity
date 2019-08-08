@@ -1255,6 +1255,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 73761397}
+    - target: {fileID: 407442476227787017, guid: 186c943baa3df6e46b837c43e82205ba,
+        type: 3}
+      propertyPath: m_MaskAlphaCutoff
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1853849167898734468, guid: 186c943baa3df6e46b837c43e82205ba,
         type: 3}
       propertyPath: Priority

@@ -22,10 +22,7 @@ public class EnemySpriteUpdater : EnemyBase
 
         if (awakened)
         {
-            Vector2 targetDirection = transform.position - player.transform.position;
-            targetDirection.Normalize();
-            float targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) / Mathf.PI * 180 + 90;
-            angle = Mathf.MoveTowardsAngle(angle, targetAngle, rotationSpeed * Time.deltaTime);
+            angle = AngleFinder();
             if (angle <= 45 && angle > -45)
             {
                 spriteRenderer.sprite = up;

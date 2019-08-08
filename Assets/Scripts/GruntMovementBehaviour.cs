@@ -4,43 +4,29 @@ using UnityEngine;
 
 public class GruntMovementBehaviour : EnemyBase
 {
-    public float speed = 1.5f;
-    
+    private void Start()
+    {
+        speed = 2f;
+    }
 
     // Update is called once per frame
     void Update()
     {
         if (awakened)
         {
+            //Only move if not under the effects of a bolas
             if (bolasTime <= 0)
             {
-                Vector2 targetDirection = rigid2D.position - (Vector2)player.transform.position;
-                targetDirection.Normalize();
-                if (player.GetComponent<PlayerController>().dashCharges > 1)
+                if (player.GetComponent<PlayerController>().dashCharges > 1)//Run away if the player has 2 or more dashes
                 {
-                    rigid2D.velocity = targetDirection * speed;
+                    Flee();
                 }
-                else
+                else//Run toward if the player has 1 or fewer dashes
                 {
-                    rigid2D.velocity = -targetDirection * speed;
+                    Chase();
                 }
             }
         }
     }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        rigid2D.velocity = new Vector2(0, 0);
-        rigid2D.angularVelocity = 0;
-        if (collision.gameObject == player)
-        {
-            if (!player.GetComponent<PlayerController>().dash)
-            {
-                Vector2 bounceDir = player.transform.position - transform.position;
-                bounceDir.Normalize();
-                player.GetComponent<PlayerController>().Damage();
-                player.GetComponent<PlayerController>().BounceOffEnemy(bounceDir);
-            }
-        }
-    }
+    
 }

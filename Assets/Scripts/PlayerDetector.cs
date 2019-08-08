@@ -4,16 +4,9 @@ using UnityEngine;
 
 public class PlayerDetector : MonoBehaviour
 {
-    GameObject parent;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        parent = transform.parent.gameObject;
-    }
-
     void OnTriggerEnter2D(Collider2D collision)
     {
+        //If player is in alert range, start code on enemy and destroy the alert checker.
         if(collision.tag == "Player")
         {
             SendMessageUpwards("Alert");

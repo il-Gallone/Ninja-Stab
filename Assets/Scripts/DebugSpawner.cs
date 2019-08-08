@@ -13,6 +13,7 @@ public class DebugSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Spawn a random item
         if(Input.GetKeyDown("i"))
         {
             int itemPicked = Random.Range(0, 3);
@@ -35,6 +36,7 @@ public class DebugSpawner : MonoBehaviour
                     }
             }
         }
+        //spawn the debug enemy
         if(Input.GetKeyDown("o"))
         {
             Instantiate(enemyPrefab, new Vector3(Random.Range(-6.5f, 6.5f), (Random.Range(-3.5f, 3.5f) + cameraObject.transform.position.y), 0), new Quaternion());

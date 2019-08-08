@@ -14,12 +14,14 @@ public class StarProjectile : MonoBehaviour
 
     void Update()
     {
+        //Fly in thrown direction, also rotate star
         rigid2D.position += direction * 12f * Time.deltaTime;
         transform.eulerAngles += new Vector3(0, 0, 360 * Time.deltaTime);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        //If collides with a player deal damage and destroy the star.
         if (collision.tag == "Player")
         {
             collision.gameObject.SendMessage("Damage");

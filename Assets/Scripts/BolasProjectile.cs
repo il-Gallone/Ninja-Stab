@@ -9,20 +9,22 @@ public class BolasProjectile : MonoBehaviour
 
     void Start()
     {
+        //Finding the rigidbody
         rigid2D = gameObject.GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
+        //Moving and rotating the bolas
         rigid2D.position += direction * 6 * Time.deltaTime;
         transform.eulerAngles += new Vector3(0, 0, 360 * Time.deltaTime);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Enemy")
+        if(collision.tag == "Enemy")//On Collision with Enemy
         {
-            collision.gameObject.SendMessageUpwards("BolasAttack");
+            collision.gameObject.SendMessageUpwards("BolasAttack"); //Trigger the bolas function
             Destroy(gameObject);
         }
     }
