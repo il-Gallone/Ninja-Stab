@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -200,11 +201,16 @@ public class PlayerController : MonoBehaviour
     {
         //Take damage if not invulnerable and become invulnerable
         if (invulnTime <= 0)
-        {
-            audioSource.clip = hurtClip;
-            audioSource.Play();
-            health--;
-            invulnTime = 0.5f;
+            {
+                audioSource.clip = hurtClip;
+                audioSource.Play();
+                health--;
+                invulnTime = 0.5f;
+                //If health is out. Goto Lose Screen
+                if (health == 0)
+                {
+                    SceneManager.LoadScene("Lose Screen");
+                }
+            }
         }
     }
-}
