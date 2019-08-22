@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 1669814438891561677}
   - component: {fileID: 8603460102787326032}
   - component: {fileID: 1805575883794784989}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Star Thrower Placeholder
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -181,6 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   awakened: 0
+  speed: 0
   rigid2D: {fileID: 1951975707846475454}
   bolasTime: 0
   player: {fileID: 0}
@@ -200,6 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   awakened: 0
+  speed: 0
   rigid2D: {fileID: 1951975707846475454}
   bolasTime: 0
   player: {fileID: 0}
@@ -219,13 +221,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   awakened: 0
+  speed: 1.2
   rigid2D: {fileID: 1951975707846475454}
   bolasTime: 0
   player: {fileID: 0}
   rotationSpeed: 90
   audioSource: {fileID: 0}
   deathClip: {fileID: 8300000, guid: 4091b9d1937946348b37bcd41cc3251a, type: 3}
-  speed: 1.2
   starPrefab: {fileID: 8512930439468263806, guid: b07c3a06a3982aa41bd2636f1cda3e05,
     type: 3}
 --- !u!82 &1805575883794784989
@@ -336,7 +338,7 @@ GameObject:
   - component: {fileID: 1560723583194252628}
   - component: {fileID: 1494224233383363072}
   - component: {fileID: 1890988246119073401}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DetectionCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -5,20 +5,15 @@ using UnityEngine;
 public class EnemyColliderController : MonoBehaviour
 {
     GameObject player;
-    Rigidbody2D rigid2D;
 
     private void Start()
     {
         //Find the player
         player = GameObject.FindGameObjectWithTag("Player");
-        rigid2D = gameObject.GetComponent<Rigidbody2D>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        //Reset force to fix collision physics.
-        rigid2D.velocity = new Vector2(0, 0);
-        rigid2D.angularVelocity = 0;
         //check if collision is the player
         if (collision.gameObject == player)
         {

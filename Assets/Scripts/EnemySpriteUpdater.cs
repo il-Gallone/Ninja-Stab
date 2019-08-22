@@ -11,7 +11,7 @@ public class EnemySpriteUpdater : EnemyBase
     public SpriteRenderer spriteRenderer;
     public float angle = 0;
 
-    private void Awake()
+    private void Start()
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
@@ -22,7 +22,7 @@ public class EnemySpriteUpdater : EnemyBase
 
         if (awakened)
         {
-            angle = AngleFinder();
+            angle = Mathf.MoveTowardsAngle(angle, AngleFinder(), rotationSpeed * Time.deltaTime);
             if (angle <= 45 && angle > -45)
             {
                 spriteRenderer.sprite = up;

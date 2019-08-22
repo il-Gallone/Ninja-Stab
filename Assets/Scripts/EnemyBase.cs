@@ -85,7 +85,7 @@ public class EnemyBase : MonoBehaviour
     //Get Target Direction
     public Vector2 FindDirection()
     {
-        Vector2 targetDirection = rigid2D.position - (Vector2)player.transform.position;
+        Vector2 targetDirection = (Vector2)transform.position - (Vector2)player.transform.position;
         targetDirection.Normalize();
         return targetDirection;
     }

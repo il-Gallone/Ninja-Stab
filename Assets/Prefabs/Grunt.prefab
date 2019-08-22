@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6681776394560054174}
   - component: {fileID: 35814772588920606}
   - component: {fileID: 6684834306899006318}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grunt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   awakened: 0
+  speed: 0
   rigid2D: {fileID: 0}
   bolasTime: 0
   player: {fileID: 0}
@@ -139,6 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   awakened: 0
+  speed: 0
   rigid2D: {fileID: 6681776394560054162}
   bolasTime: 0
   player: {fileID: 0}
@@ -164,13 +166,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   awakened: 0
+  speed: 1.5
   rigid2D: {fileID: 6681776394560054162}
   bolasTime: 0
   player: {fileID: 0}
   rotationSpeed: 90
   audioSource: {fileID: 0}
   deathClip: {fileID: 0}
-  speed: 1.5
 --- !u!82 &6684834306899006318
 AudioSource:
   m_ObjectHideFlags: 0
@@ -280,7 +282,7 @@ GameObject:
   - component: {fileID: 776784403665110052}
   - component: {fileID: 5116834011519509561}
   - component: {fileID: 3288255297802186565}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DetectionCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -364,7 +366,7 @@ GameObject:
   - component: {fileID: 4612451543126567698}
   - component: {fileID: 1592594945181144153}
   - component: {fileID: 4221293344276299041}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy Collider
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -506,6 +508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   awakened: 0
+  speed: 0
   rigid2D: {fileID: 0}
   bolasTime: 0
   player: {fileID: 0}

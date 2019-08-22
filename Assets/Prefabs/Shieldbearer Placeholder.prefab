@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3673383481137838105}
   - component: {fileID: 434243400260695451}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shield Placeholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 2529801028618140562}
   - component: {fileID: 2454435905687354566}
   - component: {fileID: 3210299898820835519}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DetectionCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 3289223006803230788}
   - component: {fileID: 3485534700896329424}
   - component: {fileID: 6457922645322178756}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shieldbearer Placeholder
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -340,6 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   awakened: 0
+  speed: 0
   rigid2D: {fileID: 3289223006803230840}
   bolasTime: 0
   player: {fileID: 0}
@@ -359,6 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   awakened: 0
+  speed: 0
   rigid2D: {fileID: 3289223006803230840}
   bolasTime: 0
   player: {fileID: 0}

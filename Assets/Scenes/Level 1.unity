@@ -2548,7 +2548,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1174422354}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e56de3f87d28c843b840286dddc6a03, type: 3}
+  m_Script: {fileID: 11500000, guid: 7fe1cfa5d3c8b474288fabb9e7003cd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!61 &1174422356
@@ -3003,6 +3003,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6681776394560054160, guid: 82404bc173d8a634196bd4713a256994,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6923458904653104767, guid: 913feb7a5dd11924db9721c95fcf7968,
+        type: 3}
     - target: {fileID: 6681776394560054174, guid: 82404bc173d8a634196bd4713a256994,
         type: 3}
       propertyPath: angle

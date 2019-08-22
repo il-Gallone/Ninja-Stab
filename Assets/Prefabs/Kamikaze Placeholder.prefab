@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1817881753098659355}
   - component: {fileID: 1817881753098659354}
   - component: {fileID: 4666380082502385047}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Dynamite (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 1817881753934540212}
   - component: {fileID: 1817881753934540211}
   - component: {fileID: 2354208749041486305}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Dynamite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 8932614328196748386}
   - component: {fileID: 8854997940309955382}
   - component: {fileID: 8386242888332793679}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DetectionCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 8451294025042128820}
   - component: {fileID: 1817881752854032671}
   - component: {fileID: 995406423}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Kamikaze Placeholder
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -448,6 +448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   awakened: 0
+  speed: 0
   rigid2D: {fileID: 8451294025042128776}
   bolasTime: 0
   player: {fileID: 0}
@@ -467,13 +468,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   awakened: 0
+  speed: 1.8
   rigid2D: {fileID: 8451294025042128776}
   bolasTime: 0
   player: {fileID: 0}
   rotationSpeed: 90
   audioSource: {fileID: 0}
   deathClip: {fileID: 8300000, guid: 4091b9d1937946348b37bcd41cc3251a, type: 3}
-  speed: 1.8
   fuseLit: 0
   fuseTime: 0
   explosionPrefab: {fileID: 8363195621906408191, guid: eed2abde406e30449af956f63ecd1c6c,

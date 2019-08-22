@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public int dashCharges = 2;
     public float dashCooldown = 0;
     public float invulnTime = 0;
+    float flashDelay = 0;
     bool bounce = false;
     float bounceTime = 0;
     Vector2 bounceDir;
@@ -73,7 +74,10 @@ public class PlayerController : MonoBehaviour
             spriteRenderer.sprite = right;
         }
         //move in the direction that the player pushes
-        rigid2D.position += direction * speed * Time.deltaTime;
+        if (!dash && !bounce)
+        {
+            rigid2D.velocity = direction * speed;
+        }
         if(direction != new Vector2(0,0))
         {
             if(!walkSource.isPlaying)
@@ -171,7 +175,23 @@ public class PlayerController : MonoBehaviour
         //If invulnerable from damage, reduce time of invulnerablity
         if(invulnTime >0)
         {
+            flashDelay += Time.deltaTime;
             invulnTime -= Time.deltaTime;
+            if (invulnTime <= 0)
+            {
+                Physics2D.IgnoreLayerCollision(8, 9, false);
+                spriteRenderer.color = new Color(1, 1, 1);
+                flashDelay = 0;
+            }
+            if (flashDelay >= 0.1f)
+            {
+                spriteRenderer.color = new Color(1, 0, 0);
+            }
+            if(flashDelay >= 0.2f)
+            {
+                flashDelay-=0.2f;
+                spriteRenderer.color = new Color(1, 1, 1);
+            }
         }
     }
 
@@ -180,7 +200,7 @@ public class PlayerController : MonoBehaviour
     {
         //Give a short invulnerabilty to stop instant damage from collision
         if (invulnTime <= 0)
-            invulnTime = 0.05f;
+            invulnTime = 0.1f;
         //Cancel Dash
         dash = false;
         dashTime = 0;
@@ -205,10 +225,12 @@ public class PlayerController : MonoBehaviour
                 audioSource.clip = hurtClip;
                 audioSource.Play();
                 health--;
-                invulnTime = 0.5f;
+                invulnTime = 1f;
+                Physics2D.IgnoreLayerCollision(8, 9, true);
                 //If health is out. Goto Lose Screen
                 if (health == 0)
                 {
+                    Physics2D.IgnoreLayerCollision(8, 9, false);
                     SceneManager.LoadScene("Lose Screen");
                 }
             }

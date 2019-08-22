@@ -9,7 +9,7 @@ public class ExplosionBehaviour : MonoBehaviour
     void Update()
     {
         //Expand while scale is smaller than 3
-        if (transform.localScale.x < 3 && transform.localScale.y < 3)
+        if (transform.localScale.x < 1.5f && transform.localScale.y < 1.5f)
         {
             transform.localScale += new Vector3(1.5f, 1.5f, 0) * Time.deltaTime;
         }
