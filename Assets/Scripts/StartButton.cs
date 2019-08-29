@@ -7,19 +7,9 @@ public class StartButton : MonoBehaviour
 {
     public string levelName;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public void LoadLevel()
     {
-        SceneManager.LoadScene(levelName);
+        SceneManager.LoadSceneAsync(levelName);
     }
 }
