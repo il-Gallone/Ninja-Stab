@@ -27,5 +27,10 @@ public class StarProjectile : MonoBehaviour
             collision.gameObject.SendMessage("Damage");
             Destroy(gameObject);
         }
+        else if(collision.tag != "Enemy")
+        {
+            //Destroy the star if colliding with a non-player collider
+            Destroy(gameObject);
+        }
     }
 }

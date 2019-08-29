@@ -8,7 +8,7 @@ public class ExplosionBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Expand while scale is smaller than 3
+        //Expand while scale is smaller than 1.5
         if (transform.localScale.x < 1.5f && transform.localScale.y < 1.5f)
         {
             transform.localScale += new Vector3(1.5f, 1.5f, 0) * Time.deltaTime;

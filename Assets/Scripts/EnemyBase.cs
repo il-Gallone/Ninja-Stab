@@ -50,10 +50,11 @@ public class EnemyBase : MonoBehaviour
 
     public virtual void BolasAttack()
     {
-        //Start Bolas Cooldown and Slow Rotation
+        //Start Bolas Cooldown, Slow Rotation and halt movement.
         rotationSpeed /= 2;
         awakened = true;
         bolasTime = 5f;
+        ZeroVelocity();
     }
 
     public void Alert()
@@ -88,6 +89,14 @@ public class EnemyBase : MonoBehaviour
         Vector2 targetDirection = (Vector2)transform.position - (Vector2)player.transform.position;
         targetDirection.Normalize();
         return targetDirection;
+    }
+
+    public void ZeroVelocity()
+    {
+        if(rigid2D != null)
+        {
+            rigid2D.velocity = new Vector2(0, 0);
+        }
     }
     
 

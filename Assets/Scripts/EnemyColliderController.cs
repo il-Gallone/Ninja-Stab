@@ -14,6 +14,7 @@ public class EnemyColliderController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        SendMessageUpwards("ZeroVelocity");
         //check if collision is the player
         if (collision.gameObject == player)
         {

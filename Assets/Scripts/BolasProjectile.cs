@@ -27,5 +27,9 @@ public class BolasProjectile : MonoBehaviour
             collision.gameObject.SendMessageUpwards("BolasAttack"); //Trigger the bolas function
             Destroy(gameObject);
         }
+        else if(collision.tag != "Player")
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -179,10 +179,12 @@ public class PlayerController : MonoBehaviour
             invulnTime -= Time.deltaTime;
             if (invulnTime <= 0)
             {
+                //When player is no longer invulnerable turn enemy collision back on and reset the flash.
                 Physics2D.IgnoreLayerCollision(8, 9, false);
                 spriteRenderer.color = new Color(1, 1, 1);
                 flashDelay = 0;
             }
+            //Flash colour while invulnerable
             if (flashDelay >= 0.1f)
             {
                 spriteRenderer.color = new Color(1, 0, 0);
@@ -226,10 +228,12 @@ public class PlayerController : MonoBehaviour
                 audioSource.Play();
                 health--;
                 invulnTime = 1f;
+                //Turn off enemy collision with the player when hit
                 Physics2D.IgnoreLayerCollision(8, 9, true);
                 //If health is out. Goto Lose Screen
                 if (health == 0)
                 {
+                    //Turn enemy collsion back on if the player dies
                     Physics2D.IgnoreLayerCollision(8, 9, false);
                     SceneManager.LoadScene("Lose Screen");
                 }
