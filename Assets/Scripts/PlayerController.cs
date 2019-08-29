@@ -43,156 +43,161 @@ public class PlayerController : MonoBehaviour
     {
         rigid2D = gameObject.GetComponent<Rigidbody2D>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        GotoCheckpoint();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float xAxis = Input.GetAxis("Horizontal"); //Change Horizontal to X-axis when switching to PS controller
-        float yAxis = Input.GetAxis("Vertical"); //Change Vertical to Y-axis when switching to PS controller
-        //Get direction based on controller sticks and normalise it
-        Vector2 direction = new Vector2(xAxis, yAxis);
-        direction.Normalize();
-        //If stick is moved change the angle
-        if ((xAxis != 0 || yAxis != 0) && !dash)
-            angle = Mathf.Atan2(yAxis, xAxis) / Mathf.PI * 180 - 90;
-        //Change the sprite based on angle
-        if (angle <= 45 && angle > -45)
+        if (!GameManager.instance.paused)
         {
-            spriteRenderer.sprite = up;
-        }
-        if (angle > 45 || angle <= -225)
-        {
-            spriteRenderer.sprite = left;
-        }
-        if (angle > -225 && angle <= -135)
-        {
-            spriteRenderer.sprite = down;
-        }
-        if (angle > -135 && angle <= -45)
-        {
-            spriteRenderer.sprite = right;
-        }
-        //move in the direction that the player pushes
-        if (!dash && !bounce)
-        {
-            rigid2D.velocity = direction * speed;
-        }
-        if(direction != new Vector2(0,0))
-        {
-            if(!walkSource.isPlaying)
+            float xAxis = Input.GetAxis("Horizontal"); //Change Horizontal to X-axis when switching to PS controller
+            float yAxis = Input.GetAxis("Vertical"); //Change Vertical to Y-axis when switching to PS controller
+                                                     //Get direction based on controller sticks and normalise it
+            Vector2 direction = new Vector2(xAxis, yAxis);
+            direction.Normalize();
+            //If stick is moved change the angle
+            if ((xAxis != 0 || yAxis != 0) && !dash)
+                angle = Mathf.Atan2(yAxis, xAxis) / Mathf.PI * 180 - 90;
+            //Change the sprite based on angle
+            if (angle <= 45 && angle > -45)
             {
-                walkSource.Play();
+                spriteRenderer.sprite = up;
             }
-        } else
-        {
-            walkSource.Stop();
-        }
-        //Dash Input
-        if (Input.GetKeyDown("joystick 1 button 0") && !bounce && dashCharges > 0)
-        {
-            audioSource.clip = dashClip;
-            audioSource.Play();
-            //Set dashing variables
-            dash = true;
-            dashTime = 0.18f;
-            dashCharges--;
-            //If Cooldown is not already active, activate the cooldown if under two dashes.
-            if(dashCooldown <= 0 && dashCharges < 2)
-                dashCooldown = 3f;
-        }
-        //Item Input
-        if(Input.GetKeyDown("joystick 1 button 1") && item != "none")
-        {
-            //Finds which code to run for each item
-            switch (item)
+            if (angle > 45 || angle <= -225)
             {
-                case "bolas":
-                    //Reset the held item and spawn the bolas giving it a direction and destruction timer
-                    item = "none";
-                    GameObject bolas = GameObject.Instantiate(bolasPrefab, transform.position, transform.rotation);
-                    bolas.GetComponent<BolasProjectile>().direction = new Vector2(Mathf.Cos((angle + 90) * Mathf.PI / 180), Mathf.Sin((angle + 90) * Mathf.PI / 180));
-                    Destroy(bolas, 1.2f);
-                    audioSource.clip = throwClip;
-                    audioSource.Play();
-                    break;
-                case "smoke":
-                    //Reset the held item and spawn the smoke giving it a direction and destruction timer
-                    item = "none";
-                    GameObject smoke = GameObject.Instantiate(smokePrefab, transform.position, transform.rotation);
-                    smoke.GetComponent<SmokeProjectile>().direction = new Vector2(Mathf.Cos((angle + 90) * Mathf.PI / 180), Mathf.Sin((angle + 90) * Mathf.PI / 180));
-                    Destroy(smoke, 0.5f);
-                    audioSource.clip = throwClip;
-                    audioSource.Play();
-                    break;
-                case "boost":
-                    //Reset the held item and give the player three more dash charges
-                    item = "none";
-                    dashCharges += 3;
-                    dashCooldown = 0;
-                    break;
+                spriteRenderer.sprite = left;
             }
-        }
-        //Dash Code
-        if(dash)
-        {
-            //Dash length tracker and set dash speed
-            dashTime -= Time.deltaTime;
-            rigid2D.velocity = (new Vector2(Mathf.Cos((angle + 90) * Mathf.PI / 180), Mathf.Sin((angle + 90) * Mathf.PI / 180)) * 36);
-            //If dash is out of time reset 
-            if (dashTime < 0)
+            if (angle > -225 && angle <= -135)
             {
-                dash = false;
-                rigid2D.velocity = new Vector2(0, 0);
+                spriteRenderer.sprite = down;
             }
-        }
-        if(bounce)
-        {
-            //Similar code to dashing but with enemy knockback instead.
-            bounceTime -= Time.deltaTime;
-            rigid2D.velocity = bounceDir * 18;
-            if (bounceTime < 0)
+            if (angle > -135 && angle <= -45)
             {
-                bounce = false;
-                rigid2D.velocity = new Vector2(0, 0);
+                spriteRenderer.sprite = right;
             }
-        }
-        //If the dash cooldown is active
-        if(dashCooldown > 0)
-        {
-            //Countdown for Cooldown
-            dashCooldown -= Time.deltaTime;
-            if(dashCooldown <= 0)
+            //move in the direction that the player pushes
+            if (!dash && !bounce)
             {
-                //Once Cooldown is finished add a charge, and reset cooldown if still below 2 dashes
-                dashCharges++;
-                if(dashCharges < 2)
+                rigid2D.velocity = direction * speed;
+            }
+            if (direction != new Vector2(0, 0))
+            {
+                if (!walkSource.isPlaying)
                 {
-                    dashCooldown += 3;
+                    walkSource.Play();
                 }
             }
-        }
-        //If invulnerable from damage, reduce time of invulnerablity
-        if(invulnTime >0)
-        {
-            flashDelay += Time.deltaTime;
-            invulnTime -= Time.deltaTime;
-            if (invulnTime <= 0)
+            else
             {
-                //When player is no longer invulnerable turn enemy collision back on and reset the flash.
-                Physics2D.IgnoreLayerCollision(8, 9, false);
-                spriteRenderer.color = new Color(1, 1, 1);
-                flashDelay = 0;
+                walkSource.Stop();
             }
-            //Flash colour while invulnerable
-            if (flashDelay >= 0.1f)
+            //Dash Input
+            if (Input.GetKeyDown("joystick 1 button 0") && !bounce && dashCharges > 0)
             {
-                spriteRenderer.color = new Color(1, 0, 0);
+                audioSource.clip = dashClip;
+                audioSource.Play();
+                //Set dashing variables
+                dash = true;
+                dashTime = 0.18f;
+                dashCharges--;
+                //If Cooldown is not already active, activate the cooldown if under two dashes.
+                if (dashCooldown <= 0 && dashCharges < 2)
+                    dashCooldown = 3f;
             }
-            if(flashDelay >= 0.2f)
+            //Item Input
+            if (Input.GetKeyDown("joystick 1 button 1") && item != "none")
             {
-                flashDelay-=0.2f;
-                spriteRenderer.color = new Color(1, 1, 1);
+                //Finds which code to run for each item
+                switch (item)
+                {
+                    case "bolas":
+                        //Reset the held item and spawn the bolas giving it a direction and destruction timer
+                        item = "none";
+                        GameObject bolas = GameObject.Instantiate(bolasPrefab, transform.position, transform.rotation);
+                        bolas.GetComponent<BolasProjectile>().direction = new Vector2(Mathf.Cos((angle + 90) * Mathf.PI / 180), Mathf.Sin((angle + 90) * Mathf.PI / 180));
+                        Destroy(bolas, 1.2f);
+                        audioSource.clip = throwClip;
+                        audioSource.Play();
+                        break;
+                    case "smoke":
+                        //Reset the held item and spawn the smoke giving it a direction and destruction timer
+                        item = "none";
+                        GameObject smoke = GameObject.Instantiate(smokePrefab, transform.position, transform.rotation);
+                        smoke.GetComponent<SmokeProjectile>().direction = new Vector2(Mathf.Cos((angle + 90) * Mathf.PI / 180), Mathf.Sin((angle + 90) * Mathf.PI / 180));
+                        Destroy(smoke, 0.5f);
+                        audioSource.clip = throwClip;
+                        audioSource.Play();
+                        break;
+                    case "boost":
+                        //Reset the held item and give the player three more dash charges
+                        item = "none";
+                        dashCharges += 3;
+                        dashCooldown = 0;
+                        break;
+                }
+            }
+            //Dash Code
+            if (dash)
+            {
+                //Dash length tracker and set dash speed
+                dashTime -= Time.deltaTime;
+                rigid2D.velocity = (new Vector2(Mathf.Cos((angle + 90) * Mathf.PI / 180), Mathf.Sin((angle + 90) * Mathf.PI / 180)) * 36);
+                //If dash is out of time reset 
+                if (dashTime < 0)
+                {
+                    dash = false;
+                    rigid2D.velocity = new Vector2(0, 0);
+                }
+            }
+            if (bounce)
+            {
+                //Similar code to dashing but with enemy knockback instead.
+                bounceTime -= Time.deltaTime;
+                rigid2D.velocity = bounceDir * 18;
+                if (bounceTime < 0)
+                {
+                    bounce = false;
+                    rigid2D.velocity = new Vector2(0, 0);
+                }
+            }
+            //If the dash cooldown is active
+            if (dashCooldown > 0)
+            {
+                //Countdown for Cooldown
+                dashCooldown -= Time.deltaTime;
+                if (dashCooldown <= 0)
+                {
+                    //Once Cooldown is finished add a charge, and reset cooldown if still below 2 dashes
+                    dashCharges++;
+                    if (dashCharges < 2)
+                    {
+                        dashCooldown += 3;
+                    }
+                }
+            }
+            //If invulnerable from damage, reduce time of invulnerablity
+            if (invulnTime > 0)
+            {
+                flashDelay += Time.deltaTime;
+                invulnTime -= Time.deltaTime;
+                if (invulnTime <= 0)
+                {
+                    //When player is no longer invulnerable turn enemy collision back on and reset the flash.
+                    Physics2D.IgnoreLayerCollision(8, 9, false);
+                    spriteRenderer.color = new Color(1, 1, 1);
+                    flashDelay = 0;
+                }
+                //Flash colour while invulnerable
+                if (flashDelay >= 0.1f)
+                {
+                    spriteRenderer.color = new Color(1, 0, 0);
+                }
+                if (flashDelay >= 0.2f)
+                {
+                    flashDelay -= 0.2f;
+                    spriteRenderer.color = new Color(1, 1, 1);
+                }
             }
         }
     }
@@ -238,5 +243,9 @@ public class PlayerController : MonoBehaviour
                     SceneManager.LoadScene("Lose Screen");
                 }
             }
-        }
     }
+    public void GotoCheckpoint()
+    {
+        //TODO PlayerCheckpoint code;
+    }
+}
